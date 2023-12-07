@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zenithrajbhandari_mapd711_assign4.db.UserRepository
-import com.example.zenithrajbhandari_mapd711_assign4.model.User
+import com.example.zenithrajbhandari_mapd711_assign4.db.pizza.PizzaRepository
+import com.example.zenithrajbhandari_mapd711_assign4.model.Pizza
 import kotlinx.coroutines.launch
 
-class UserViewModel(
-    private val userRepository: UserRepository
+class PizzaViewModel(
+    private val pizzaRepository: PizzaRepository
 ) : ViewModel() {
 //    private val _users = MutableLiveData<List<User>>()
 //    val users: LiveData<List<User>>
@@ -19,8 +19,8 @@ class UserViewModel(
 //        getAllUsers()
 //    }
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>>
+    private val _users = MutableLiveData<List<Pizza>>()
+    val users: LiveData<List<Pizza>>
         get() = _users
 
 //    init {
@@ -29,40 +29,40 @@ class UserViewModel(
 
     private fun getUsers() {
         viewModelScope.launch {
-            val result = userRepository.getAllUsers()
+            val result = pizzaRepository.getAllPizza()
             _users.value = result
         }
     }
 
-    suspend fun getAllUsers(): List<User> {
-        return userRepository.getAllUsers()
+    suspend fun getAllUsers(): List<Pizza> {
+        return pizzaRepository.getAllPizza()
 //        viewModelScope.launch {
 //            val result = userRepository.getAllUsers()
 ////            _users.value = result
 //        }
     }
 
-    fun insertUser(user: User) {
+    fun insertPizza(order: Pizza) {
         viewModelScope.launch {
-            userRepository.insertUser(user)
+            pizzaRepository.insertPizza(Pizza)
         }
     }
 
-    fun updateUser(user: User) {
+    fun updatePizza(order: Pizza) {
         viewModelScope.launch {
-            userRepository.updateUser(user)
+            pizzaRepository.updatePizza(Pizza)
         }
     }
 
-    fun deleteUser(user: User) {
+    fun deletePizza(pizza: Pizza) {
         viewModelScope.launch {
-            userRepository.deleteUser(user)
+            pizzaRepository.deletePizza(Pizza)
         }
     }
 
     fun deleteAll() {
         viewModelScope.launch {
-            userRepository.deleteAll()
+            pizzaRepository.deleteAll()
         }
     }
 }
